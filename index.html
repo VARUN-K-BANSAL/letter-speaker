@@ -26,7 +26,7 @@
                 if(chars[i] == ' ') utterance = new SpeechSynthesisUtterance("space");
                 else if(chars[i] == ',') utterance = new SpeechSynthesisUtterance("comma");
                 else utterance = new SpeechSynthesisUtterance(chars[i]);
-                utterance.rate = 1
+                utterance.rate = 0.1
                 // Speak the utterance
                 window.speechSynthesis.speak(utterance);
             }
