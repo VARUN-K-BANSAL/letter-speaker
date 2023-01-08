@@ -27,6 +27,8 @@
           let chars = text.split("");
           for (let i = 0; i < chars.length; i++) {
             const utterance = new SpeechSynthesisUtterance(chars[i]);
+            
+            utterance.rate = 3;
 
             // Speak the utterance
             window.speechSynthesis.speak(utterance);
