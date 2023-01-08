@@ -1,40 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <input type="text" />
-    <button>Click Me</button>
-    <script>
-      // Check if the browser supports the Web Speech API
-      if ("speechSynthesis" in window) {
-        // Get the text input element
-        const input = document.querySelector('input[type="text"]');
+<html>
+<body>
 
-        // Get the synthesize button
-        const button = document.querySelector("button");
+<input type="file" id="myFile" name="filename">  
+<br><br>
 
-        // Add a click event listener to the button
-        button.addEventListener("click", () => {
-          // Get the text to synthesize
-          const text = input.value;
+<label><b>Your Converted Text:</b></label><br><br>
 
-          // Create a new speech synthesis utterance
-          let chars = text.split("");
-          for (let i = 0; i < chars.length; i++) {
-            const utterance = new SpeechSynthesisUtterance(chars[i]);
-            
-            utterance.rate = 3;
+<textarea cols="30" name="original" rows="10" style="width: 100%;" id="convertedText">
+</textarea>
 
-            // Speak the utterance
-            window.speechSynthesis.speak(utterance);
-          }
+<script src='https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js'></script>
+
+<script>  
+
+    var myFile = document.getElementById('myFile');
+    myFile.addEventListener('change', recognizeText);
+
+    async function recognizeText({ target: { files }  }) {
+        Tesseract.recognize(files[0]).then(function(result) {
+            console.log("recognizeText: result.text:", result.text);
+            document.getElementById("convertedText").value = result.text;
+            let chars = result.text.split("");
+            for (let i = 0; i < chars.length; i++) {
+                const utterance = new SpeechSynthesisUtterance(chars[i]);
+                utterance.rate = 5
+                // Speak the utterance
+                window.speechSynthesis.speak(utterance);
+            }
         });
-      }
-    </script>
-  </body>
+    }
+
+</script>
+        
+</body>
 </html>
