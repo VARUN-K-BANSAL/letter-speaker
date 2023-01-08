@@ -24,7 +24,8 @@
             for (let i = 0; i < chars.length; i++) {
                 let utterance;
                 if(chars[i] == ' ') utterance = new SpeechSynthesisUtterance("space");
-                utterance = new SpeechSynthesisUtterance(chars[i]);
+                else if(chars[i] == ',') utterance = new SpeechSynthesisUtterance("comma");
+                else utterance = new SpeechSynthesisUtterance(chars[i]);
                 utterance.rate = 1
                 // Speak the utterance
                 window.speechSynthesis.speak(utterance);
