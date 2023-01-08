@@ -22,8 +22,10 @@
             document.getElementById("convertedText").value = result.text;
             let chars = result.text.split("");
             for (let i = 0; i < chars.length; i++) {
-                const utterance = new SpeechSynthesisUtterance(chars[i]);
-                utterance.rate = 5
+                let utterance;
+                if(chars[i] == ' ') utterance = new SpeechSynthesisUtterance("space");
+                utterance = new SpeechSynthesisUtterance(chars[i]);
+                utterance.rate = 1
                 // Speak the utterance
                 window.speechSynthesis.speak(utterance);
             }
