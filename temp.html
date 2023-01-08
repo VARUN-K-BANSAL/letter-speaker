@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button>Click Me</button>
+    <script>
+      // Check if the browser supports the Web Speech API
+      if ("speechSynthesis" in window) {
+        // Get the text input element
+        const input = document.querySelector('input[type="text"]');
+
+        // Get the synthesize button
+        const button = document.querySelector("button");
+
+        // Add a click event listener to the button
+        button.addEventListener("click", () => {
+          // Get the text to synthesize
+          const text = input.value;
+
+          // Create a new speech synthesis utterance
+          let chars = text.split("");
+          for (let i = 0; i < chars.length; i++) {
+            const utterance = new SpeechSynthesisUtterance(chars[i]);
+
+            // Speak the utterance
+            window.speechSynthesis.speak(utterance);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
